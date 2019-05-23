@@ -2,22 +2,24 @@
 a=$1
 b=[Cc][Pp][Uu]
 c=[Mm][Ee][Mm]
-if [[ $a == $b ]]; then
-a=`head -1 /proc/stat |  awk '{print $2}'`
-b=`head -1 /proc/stat |  awk '{print $3}'`
-c=`head -1 /proc/stat |  awk '{print $4}'`
-d=`head -1 /proc/stat |  awk '{print $5}'`
-e=`head -1 /proc/stat |  awk '{print $6}'`
-f=`head -1 /proc/stat |  awk '{print $7}'`
-g=`head -1 /proc/stat |  awk '{print $8}'`
-h=`head -1 /proc/stat |  awk '{print $9}'`
+
+if [[ $a == $b ]]; 
+then
+y=`head -1 /proc/stat |  awk '{print $2}'`
+k=`head -1 /proc/stat |  awk '{print $3}'`
+l=`head -1 /proc/stat |  awk '{print $4}'`
+m=`head -1 /proc/stat |  awk '{print $5}'`
+n=`head -1 /proc/stat |  awk '{print $6}'`
+o=`head -1 /proc/stat |  awk '{print $7}'`
+p=`head -1 /proc/stat |  awk '{print $8}'`
+s=`head -1 /proc/stat |  awk '{print $9}'`
 l=`head -1 /proc/stat |  awk '{print $10}'`
 k=`head -1 /proc/stat |  awk '{print $11}'`
 
-let sum=$a+$b+$c+$d+$e+$f+$g+$h+$l+$k
+let sum=$y+$k+$l+$m+$n+$o+$p+$s+$l+$k
 
 
-for i in $a $b $c $d $e $f $g $h $l $k
+for i in $y $k $l $m $n $o $p $s $l $k
 do
 result=`echo "${i}/${sum}*100" | bc -l | xargs printf %.2f`
 echo "$result" >> /tmp/result
@@ -25,7 +27,8 @@ done
 
 sed ':a;N;$!ba;s/\n/,/g' /tmp/result | awk -F ',' '{print " system.cpu.idle:" substr($4,1,4) " system.cpu.user:" substr($1,1,5) " system.cpu.guest:" substr($9,1,4) " system.cpu.iowait:" substr($5,1,4) " system.cpu.stolen:" substr($8,1,4) " system.cpu.system:"  substr($3,1,4)}' | tr ' ' '\n' && rm /tmp/result
 
-elif [[ $a == $c ]]; then
+elif [[ $a == $c ]];
+then
 free -mh | sed ':a;N;$!ba;s/\n/,/g' | awk -F ' ' '{print " virtual.total:" substr($7,1,7) " virtual.used:" substr($8,1,7) " virtual.free:" substr($9,1,7) " virtual.shared:" substr($10,1,7) " swap.total:" substr($13,1,7) " swap.used:" substr($14,1,7) " swap.free:" substr($15,1,7)}' | tr ' ' '\n'
 else echo "You should use './script Cpu' or './script Mem'"
 fi
