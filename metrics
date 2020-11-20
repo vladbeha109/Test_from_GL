@@ -32,3 +32,5 @@ then
 free -mh | sed ':a;N;$!ba;s/\n/,/g' | awk -F ' ' '{print " virtual.total:" substr($7,1,7) " virtual.used:" substr($8,1,7) " virtual.free:" substr($9,1,7) " virtual.shared:" substr($10,1,7) " swap.total:" substr($13,1,7) " swap.used:" substr($14,1,7) " swap.free:" substr($15,1,7)}' | tr ' ' '\n'
 else echo "You should use './script Cpu' or './script Mem'"
 fi
+
+test
