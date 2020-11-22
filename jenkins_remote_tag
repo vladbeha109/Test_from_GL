@@ -11,7 +11,7 @@ pipeline {
     stages {
         stage("Get Date") {
             steps {
-                sh 'date'
+                sh 'apt update'
             }
         }
         stage("Get the hostname") {
