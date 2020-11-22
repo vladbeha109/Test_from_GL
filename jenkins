@@ -1,0 +1,22 @@
+#!groovy
+// Test jenkins pipe
+properties([disableConcurrentBuilds()])
+
+pipeline {
+	agent {label 'master'}
+	options {
+		buildDiscarder(logRotator(numToKeepStr: '10', artifactNumToKeppStr: '10')}
+		timestamps()
+	}
+	stages {
+		stage ("Get hostname") {
+			steps {
+				sh 'ssh root@10.0.2.15 \'hostname\''
+			}
+		}
+		stage("Get uptime") {
+			steps {
+				sh 'ssh root@10.0.2.15 \'uptime\'
+			}
+		}
+	}
