@@ -1,0 +1,34 @@
+#!groovy
+// Test jenkins pipe
+properties([disableConcurrentBuilds()])
+
+pipeline {
+    agent {label 'remote'}
+    options {
+        buildDiscarder(logRotator(numToKeepStr: '10', artifactNumToKeepStr: '10'))
+        timestamps()
+    }
+    stages {
+        stage("Update apt") {
+            steps {
+                sh 'apt update'
+            }
+        }
+        stage("Get the hostname") {
+            steps {
+                sh 'hostname'
+            }
+        }
+        stage("Start NGNIX") {
+            steps {
+                sh 'systemctl start nginx'
+            }
+        }
+	stage ("Check NGINX status") {
+	    steps {
+		sh 'systemctl status nginx'
+	    }
+	} 
+		
+    }
+}
