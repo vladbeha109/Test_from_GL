@@ -21,7 +21,7 @@ pipeline {
         }
         stage("Start NGNIX") {
             steps {
-                sh 'systemctl start nginx'
+                sh 'sudo systemctl start nginx'
             }
         }
 	stage ("Check NGINX status") {
