@@ -9,20 +9,26 @@ pipeline {
         timestamps()
     }
     stages {
-        stage("Get hostname") {
-            steps {
-                sh 'ssh root@10.0.2.15 \'hostname\''
-            }
-        }
-        stage("Get uptime") {
-            steps {
-                sh 'ssh root@10.0.2.15 \'uptime\''
-            }
-        }
         stage("Update apt") {
             steps {
                 sh 'ssh root@10.0.2.15 \'apt update\''
             }
         }
+        stage("Install NGNIX") {
+            steps {
+                sh 'ssh root@10.0.2.15 \'apt install nginx\''
+            }
+        }
+        stage("Start NGNIX") {
+            steps {
+                sh 'ssh root@10.0.2.15 \'systemctl start nginx\''
+            }
+        }
+	stage ("Check NGINX status") {
+	    steps {
+		sh 'ssh root@10.0.2.15 \'systemctl status nginx\''
+	    }
+	} 
+		
     }
 }
