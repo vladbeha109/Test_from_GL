@@ -14,9 +14,9 @@ pipeline {
                 sh 'ssh root@10.0.2.15 \'apt update\''
             }
         }
-        stage("Install NGNIX") {
+        stage("Install NGINX") {
             steps {
-                sh 'ssh root@10.0.2.15 \'apt install nginx\''
+                sh 'ssh root@10.0.2.15 \'sudo apt install nginx\''
             }
         }
         stage("Start NGNIX") {
