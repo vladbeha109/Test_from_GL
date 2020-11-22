@@ -9,9 +9,9 @@ pipeline {
         timestamps()
     }
     stages {
-        stage("Update apt") {
+        stage("Get Date") {
             steps {
-                sh 'apt update'
+                sh 'date'
             }
         }
         stage("Get the hostname") {
