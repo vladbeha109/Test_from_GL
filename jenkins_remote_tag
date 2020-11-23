@@ -9,7 +9,7 @@ pipeline {
         timestamps()
     }
     stages {
-        stage("Get Date") {
+        stage("Update apt command") {
             steps {
                 sh 'apt update'
             }
