@@ -11,7 +11,7 @@ pipeline {
     stages {
         stage("Get Date") {
             steps {
-                sh 'whoami'
+                sh 'sudo apt update'
             }
         }
         stage("Get the hostname") {
