@@ -1,8 +1,8 @@
-Script created in order to take metrics from the OS regarding CPU% and Memory% usage
+Script created in order to take metrics from the OS about CPU% and Memory% usage
 
 -------------------------------------------------------------------------------------------------------------------------------
 -------------------------------------------------------------------------------------------------------------------------------
-Where we can use sript ./metrics?
+Where we can use this sript?
 -------------------------------------------------------------------------------------------------------------------------------
 -------------------------------------------------------------------------------------------------------------------------------
 
@@ -12,13 +12,13 @@ Linux/Unix OS
 
 -------------------------------------------------------------------------------------------------------------------------------
 -------------------------------------------------------------------------------------------------------------------------------
-How you can run script?
+How you can run the script?
 -------------------------------------------------------------------------------------------------------------------------------
 -------------------------------------------------------------------------------------------------------------------------------
 
 
-Easy way to run script, it is copy code from my file from git https://github.com/vladbeha109/Test_from_GL and run it in your 
-console, but do not forget add permissions - chmod +x <file_with_my_script>, then:
+The easy way to run the scrip is copy code from my from git https://github.com/vladbeha109/Test_from_GL and run it on your 
+machine, but before that do not forget to add permissions - chmod +x <file_with_my_script>, the examples of using is below:
 
 ./<file_with_my_script> cpu
 
@@ -49,26 +49,29 @@ swap.free:0B
 
 -------------------------------------------------------------------------------------------------------------------------------
 -------------------------------------------------------------------------------------------------------------------------------
-How script works?
+What behind of the scene?
 -------------------------------------------------------------------------------------------------------------------------------
 -------------------------------------------------------------------------------------------------------------------------------
 
-###Below I indicated the variables, "a" receive value from console, user write cpu or mem
-##Then "b" and "c" I am using to compare "a" with "b" or with "c" to check that my conditions are working correct
+###I named the variables and assigned values to them:
+
+- "a" value, it is parameter which user pass to the script, it can be cpu or mem
+
+- "b" and "c" values are using for validation purpose, I compare the value in the "a" variable with "b" and "c" to be sure that user writes the correct parameter.
 
 a=$1
 b=[Cc][Pp][Uu]
 c=[Mm][Ee][Mm]
 
-##then I start receive metrics from /proc/stat for each value
+##then I am getting metrics from /proc/stat for each value
 
 y=`head -1 /proc/stat |  awk '{print $2}'`
 
-##I do sum from all values that then to get value in % for  user, system, guest...etc 
+##I assemble all values in order to get value in % for  user, system, guest...etc 
 
 let sum=$y+$k+$l+$m+$n+$o+$p+$s+$l+$k
 
-#below formula for calculation CPU per different type of usage(system,user...), I make division for every variable to sum these 
+#below formula for calculation CPU per different type of usage(system,user...), I make division for every variable to sum it 
 ##variables and then I do multiplication on 100, so that output will be in percentege
 
 result=`echo "${i}/${sum}*100" | bc -l | xargs printf %.2f`
